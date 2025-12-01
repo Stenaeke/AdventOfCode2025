@@ -6,8 +6,7 @@ import java.util.List;
 public class PasswordCracker {
 
     public List<String> readContent(Path filepath) throws IOException {
-        List<String> contentList = Files.readAllLines(filepath);
-        return contentList;
+        return Files.readAllLines(filepath);
     }
 
     public int executeOperationsCountZeros(int startNumber, List<String> operation) {
@@ -50,7 +49,7 @@ public class PasswordCracker {
             }
 
             rotationCounter += Math.abs(targetSector - startSector);
-            startNumber = Math.floorMod(targetPos, 100);
+            startNumber = targetPos;
         }
 
         return rotationCounter;
