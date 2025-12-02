@@ -50,42 +50,6 @@ public class IdParser {
     }
 
     public Boolean checkPattern(String value) {
-        if (value.length() == 1) {
-            return false;
-        }
-        if(value.length()>=3) {
-            if(checkDoublePattern(value))
-                return true;
-        }
-        if(value.length()>=5) {
-            if(checkTriplePattern(value))
-                return true;
-        }
-        String regex = (value.substring(0, Math.ceilDiv(value.length(),2)));
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(value.substring(Math.ceilDiv(value.length(),2)));
-        return matcher.find(0);
-    }
-
-    public Boolean checkDoublePattern(String value) {
-        String regex = (value.substring(0,2));
-        Pattern pattern = Pattern.compile(regex);
-        for (int i = 0; i + 1< value.length(); i = i+2) {
-            if (!pattern.matcher(value.substring(i, i+2)).find() || !value.endsWith(regex)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public Boolean checkTriplePattern(String value) {
-        String regex = (value.substring(0,3));
-        Pattern pattern = Pattern.compile(regex);
-        for (int i = 0; i + 2 < value.length(); i = i+3) {
-            if (!pattern.matcher(value.substring(i, i+3)).find() || !value.endsWith(regex)) {
-                return false;
-            }
-        }
-        return true;
+        return value.matches(("(.+)\\1+"));
     }
 }

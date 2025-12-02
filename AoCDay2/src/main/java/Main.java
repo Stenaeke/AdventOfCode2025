@@ -7,9 +7,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         IdParser parser = new IdParser();
-        Path filePath = Path.of("src/main/java/test.txt");
+        Path filePath = Path.of("AoCDay2/src/main/java/id_ranges.txt");
         Map<Long,Long > idRanges = parser.parseId(filePath);
         Long badIdsPart1 = parser.findBadIds(idRanges);
-        System.out.println("Bad ids part 1: " + badIdsPart1);
+        System.out.println("Bad ids part 2: " + badIdsPart1);
     }
 }
