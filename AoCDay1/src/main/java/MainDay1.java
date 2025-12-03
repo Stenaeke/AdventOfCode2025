@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Path;
 
-public class Main {
+public class MainDay1 {
 
     public static void main(String[] args) throws IOException {
         int startNumber = 50;

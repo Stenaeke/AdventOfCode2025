@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 
-public class Main {
+public class MainDay2 {
 
 
     public static void main(String[] args) throws IOException {
