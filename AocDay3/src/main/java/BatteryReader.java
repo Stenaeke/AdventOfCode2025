@@ -9,30 +9,36 @@ public class BatteryReader {
         return Files.readAllLines(filePath);
     }
 
-    public int getHighestVoltage(List<String> batteries) {
-        int highestVoltage = 0;
+    public long getHighestVoltage(List<String> batteries, int numJoltages) {
+        long highestVoltage = 0;
 
         for (String battery : batteries) {
-            int highestValue = 0;
-            int secondHighestValue = 0;
+            int skips = battery.length() - numJoltages;
 
-            for (int i = 0; i < battery.length() - 1; i++) {
-                int value = Integer.parseInt(String.valueOf(battery.charAt(i)));
-                if  (value > highestValue) {
-                    highestValue = value;
+            StringBuilder resultingNumber = new StringBuilder();
+
+            for (char c : battery.toCharArray()) {
+                int currentDigit = Character.getNumericValue(c);
+                while (!resultingNumber.isEmpty() && skips > 0) {
+                    int lastDigit = Character.getNumericValue(resultingNumber.charAt(resultingNumber.length() - 1));
+
+                    if (currentDigit > lastDigit) {
+                        resultingNumber.deleteCharAt(resultingNumber.length() - 1);
+                        skips--;
+                    } else {
+                        break;
+                    }
                 }
+
+                resultingNumber.append(c);
             }
-            for (int i = battery.indexOf(String.valueOf(highestValue)) + 1; i < battery.length(); i++) {
-                int value = Integer.parseInt(String.valueOf(battery.charAt(i)));
-                if (value > secondHighestValue) {
-                    secondHighestValue = value;
-                }
-            }
-            int sumForBattery = Integer.parseInt(Integer.toString(highestValue) + Integer.toString(secondHighestValue));
-            System.out.println("sumForBattery: " + sumForBattery);
-            highestVoltage += sumForBattery;
+
+            resultingNumber.setLength(numJoltages);
+
+            long sumForBatteryLong = Long.parseLong(resultingNumber.toString());
+            System.out.println("Result: " + resultingNumber);
+            highestVoltage += sumForBatteryLong;
         }
-
         return highestVoltage;
     }
 }

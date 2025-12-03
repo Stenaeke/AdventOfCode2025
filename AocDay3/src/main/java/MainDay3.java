@@ -8,7 +8,7 @@ public class MainDay3 {
         Path filePath = Path.of("AocDay3/src/main/java/battery_input.txt");
         BatteryReader batteryReader = new BatteryReader();
         List<String> batteries = batteryReader.parseInput(filePath);
-        int result = batteryReader.getHighestVoltage(batteries);
+        long result = batteryReader.getHighestVoltage(batteries, 12);
         System.out.println("result: " + result);
     }
 }
